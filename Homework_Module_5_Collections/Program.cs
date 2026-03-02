@@ -11,22 +11,22 @@ class Program
 {
     static void Main(string[] args)
     {
-        
+        /*
         ExplanatoryDictionary explanatoryDictionary = new();
         explanatoryDictionary.Run();
-        /*
+        
         QueueStore queueStore = new();
         queueStore.Run();
-
+        
         DynamicArrayAdvanced dynamicArrayAdvanced = new();
         dynamicArrayAdvanced.Run();
-
+        
         AdvancedPersonnelAccounting advancedPersonnelAccounting = new();
         advancedPersonnelAccounting.Run();
-
+        */
         MergingIntoOneCollection mergingIntoOneCollection = new();
         mergingIntoOneCollection.Run();
-        */
+        
 
     }
 }
