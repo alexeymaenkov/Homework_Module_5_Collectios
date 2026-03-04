@@ -9,50 +9,64 @@ public class QueueStore
         //После каждого обслуженного клиента деньги нужно добавлять на наш счёт и выводить его в консоль.
         //После обслуживания каждого клиента программа ожидает нажатия любой клавиши, после чего затирает
         //консоль и по новой выводит всю информацию, только уже со следующим клиентом
-        
-        Queue<int> purchases = new(10);
 
+        int queueCapacity = 10;
+        int minQueueValue = 10;
+        int maxQueueValue = 30;
         int storePersonalAccount = 0;
-        
-        for ( int i = 0; i < purchases.Capacity; i++)
-        {
-            int purchase = new Random().Next(1, 30);
-            purchases.Enqueue(purchase);
-        }
-        
+
+        Queue<int> purchases = GenerateQueue(queueCapacity, minQueueValue, maxQueueValue);
+
         while (purchases.Count > 0)
         {
-            ShowInformation(ref purchases, ref storePersonalAccount);
+            ShowInformation(purchases);
 
-            ServeClient(ref purchases, ref storePersonalAccount);
+            Console.WriteLine($"\nСумма лицевого счете: {storePersonalAccount}");
+
+            storePersonalAccount += ServeClient(purchases);
 
             Console.Write("\nПродолжить? ");
             Console.ReadKey();
             Console.Clear();
         }
     }
-    
-    static void ShowInformation(ref Queue<int> purchases, ref int storePersonalAccount)
-    {
-        Console.Write("Очередь покупателей: ");
-        
-        foreach (int purcase in purchases)
-            Console.Write(purcase + " | ");
 
-        Console.WriteLine($"\nСумма лицевого счете: {storePersonalAccount}");
+    static Queue<int> GenerateQueue(int queueCapacity, int minQueueValue, int maxQueueValue)
+    {
+        Queue<int> purchases = new();
+
+        for (int i = 0; i < queueCapacity; i++)
+        {
+            int purchase = new Random().Next(minQueueValue, maxQueueValue);
+            purchases.Enqueue(purchase);
+        }
+
+        return purchases;
     }
 
-    static void ServeClient(ref Queue<int> purchases, ref int storePersonalAccount)
+    static void ShowInformation(Queue<int> purchases)
     {
+        Console.Write("Очередь покупателей: ");
+
+        foreach (int purcase in purchases)
+            Console.Write(purcase + " | ");
+    }
+
+    static int ServeClient(Queue<int> purchases)
+    {
+        int accountIncrease = 0;
+
         Console.WriteLine($"Следующий клиент в очереди с покупкой на сумму: {purchases.Peek()}");
-        
+
         Console.Write("Обслужить клиента?");
         Console.ReadKey();
-        
-        storePersonalAccount += purchases.Dequeue();
-        
+
+        accountIncrease += purchases.Dequeue();
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nКлиент обслужен!");
         Console.ResetColor();
+
+        return accountIncrease;
     }
 }

@@ -20,13 +20,12 @@ class Program
         
         DynamicArrayAdvanced dynamicArrayAdvanced = new();
         dynamicArrayAdvanced.Run();
-        
+        */
         AdvancedPersonnelAccounting advancedPersonnelAccounting = new();
         advancedPersonnelAccounting.Run();
-        */
+        /*
         MergingIntoOneCollection mergingIntoOneCollection = new();
         mergingIntoOneCollection.Run();
-        
-
+        */
     }
 }

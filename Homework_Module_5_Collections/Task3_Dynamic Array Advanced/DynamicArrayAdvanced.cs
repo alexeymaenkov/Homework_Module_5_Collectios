@@ -13,58 +13,58 @@ public class DynamicArrayAdvanced
 
         const string COMMAND_SUM = "sum";
         const string COMMAND_EXIT = "exit";
-        
+
         List<int> numbers = new();
-        
+
         bool isWorking = true;
 
         while (isWorking)
         {
-            PrintNumbers(ref numbers);
-            
-            string userInput = GetInput("\nВведите число или команду (sum/exit): ");
+            PrintNumbers(numbers);
+
+            string userInput = GetInput($"\nВведите число или команду ({COMMAND_SUM}/{COMMAND_EXIT}): ");
 
             switch (userInput)
             {
                 case COMMAND_SUM:
                     Console.Clear();
-                    Console.WriteLine("Сумма чисел: " + SumNumbers(ref numbers));
+                    Console.WriteLine("Сумма чисел: " + SumNumbers(numbers));
                     break;
-                
+
                 case COMMAND_EXIT:
                     isWorking = false;
                     break;
-                
+
                 default:
-                    AddNumbers(ref userInput, ref numbers);
+                    AddNumbers(userInput, numbers);
                     break;
             }
         }
     }
-    
+
     static string GetInput(string message)
     {
         Console.Write(message);
         return Console.ReadLine().Trim();
     }
 
-    static int SumNumbers(ref List<int> list)
+    static int SumNumbers(List<int> list)
     {
         int sum = 0;
 
         foreach (var number in list)
             sum += number;
-        
+
         return sum;
     }
-    
-    static void PrintNumbers(ref List<int> list)
+
+    static void PrintNumbers(List<int> list)
     {
         foreach (var number in list)
             Console.Write(number + " ");
     }
 
-    static void AddNumbers(ref string userInput, ref List<int> numbers)
+    static void AddNumbers(string userInput, List<int> numbers)
     {
         if (int.TryParse(userInput, out int userNumber))
         {

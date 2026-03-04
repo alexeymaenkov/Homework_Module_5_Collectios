@@ -20,17 +20,17 @@ public class ExplanatoryDictionary
         {
             string userInput = GetInput("Введите название бренда часов: ");
 
-            SearchValue(ref watches, ref userInput);
+            SearchValue(watches, userInput);
         }
     }
-    
+
     static string GetInput(string message)
     {
         Console.Write(message);
         return Console.ReadLine();
     }
-    
-    static void SearchValue(ref Dictionary<string, int> dictionary, ref string userInput)
+
+    static void SearchValue(Dictionary<string, int> dictionary, string userInput)
     {
         if (dictionary.TryGetValue(userInput, out int value))
         {
@@ -41,7 +41,7 @@ public class ExplanatoryDictionary
             OutputError("Такого бренда нет в каталоге.");
         }
     }
-    
+
     static void OutputError(string message)
     {
         Console.Clear();
