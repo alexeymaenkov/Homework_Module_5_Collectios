@@ -105,15 +105,15 @@ public class AdvancedPersonnelAccounting
             return;
         }
 
-        List<string> jobs = new(workers.Keys); //Создаем список строк хранящий все ключи(должности) из словаря workers
+        List<string> jobs = new(workers.Keys);
 
-        foreach (var job in jobs) //Итерируемся по этому списку
+        foreach (var job in jobs)
         {
-            List<string> namesByJob = workers[job]; //Создаем список строк хранящий все ФИО соответствующие ключу job из foreach в данной итерации
+            List<string> namesByJob = workers[job];
 
-            namesByJob.Remove(nameToDelete); //Если имя в списке совпадает с указанным для удаления - удаляем его
+            namesByJob.Remove(nameToDelete);
 
-            if (namesByJob.Count == 0) //Если список имен для ключа job из foreach в данной итерации пуст - удаляем ключ
+            if (namesByJob.Count == 0)
                 workers.Remove(job);
         }
 

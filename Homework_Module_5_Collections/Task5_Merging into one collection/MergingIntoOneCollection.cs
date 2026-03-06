@@ -20,22 +20,21 @@ public class MergingIntoOneCollection
     {
         List<string> list = new();
 
-        foreach (var str in array1)
-        {
-            if (!list.Contains(str))
-            {
-                list.Add(str);
-            }
-        }
-
-        foreach (var str in array2)
-        {
-            if (!list.Contains(str))
-            {
-                list.Add(str);
-            }
-        }
+        ArrayToList(list, array1);
+        
+        ArrayToList(list, array2);
 
         return list;
+    }
+
+    static void ArrayToList(List<string> list, string[] array)
+    {
+        foreach (var str in array)
+        {
+            if (!list.Contains(str))
+            {
+                list.Add(str);
+            }
+        }
     }
 }
