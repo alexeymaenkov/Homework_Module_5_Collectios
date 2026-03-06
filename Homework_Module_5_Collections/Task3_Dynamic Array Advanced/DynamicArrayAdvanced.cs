@@ -36,7 +36,7 @@ public class DynamicArrayAdvanced
                     break;
 
                 default:
-                    AddNumbers(userInput, numbers);
+                    AddInputNumber(userInput, numbers);
                     break;
             }
         }
@@ -64,7 +64,7 @@ public class DynamicArrayAdvanced
             Console.Write(number + " ");
     }
 
-    static void AddNumbers(string userInput, List<int> numbers)
+    static void AddInputNumber(string userInput, List<int> numbers)
     {
         if (int.TryParse(userInput, out int userNumber))
         {

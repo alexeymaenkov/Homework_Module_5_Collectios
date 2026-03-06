@@ -16,7 +16,13 @@ public class AdvancedPersonnelAccounting
         const string COMMAND_SHOW_INFORMATION = "3";
         const string COMMAND_EXIT = "4";
 
-        Dictionary<string, List<string>> workers = new();
+        //Dictionary<string, List<string>> workers = new();
+        Dictionary<string, List<string>> workers = new Dictionary<string, List<string>>
+        {
+            { "1", new List<string> { "a", "b", "c" } },
+            { "2", new List<string> { "d", "e", "f" } },
+            { "3", new List<string> { "g", "h", "j" } },
+        };
 
         bool isWorking = true;
 
@@ -91,28 +97,24 @@ public class AdvancedPersonnelAccounting
             return;
         }
 
-        string deleteWorkerName = GetInput("Введите ФИО сотрудника, которого нужно удалить: ");
+        string nameToDelete = GetInput("Введите ФИО сотрудника, которого нужно удалить: ");
 
-        if (string.IsNullOrWhiteSpace(deleteWorkerName))
+        if (string.IsNullOrWhiteSpace(nameToDelete))
         {
             OutputError("Ошибка! Не верный ввод ФИО сотрудника.\n");
             return;
         }
 
-        foreach (var worker in workers.ToList())
-        {
-            for (int j = 0; j < worker.Value.Count; j++)
-            {
-                if (worker.Value[j] == deleteWorkerName)
-                {
-                    worker.Value.RemoveAt(j);
-                }
+        List<string> jobs = new(workers.Keys); //Создаем список строк хранящий все ключи(должности) из словаря workers
 
-                if (worker.Value.Count == 0)
-                {
-                    workers.Remove(worker.Key);
-                }
-            }
+        foreach (var job in jobs) //Итерируемся по этому списку
+        {
+            List<string> namesByJob = workers[job]; //Создаем список строк хранящий все ФИО соответствующие ключу job из foreach в данной итерации
+
+            namesByJob.Remove(nameToDelete); //Если имя в списке совпадает с указанным для удаления - удаляем его
+
+            if (namesByJob.Count == 0) //Если список имен для ключа job из foreach в данной итерации пуст - удаляем ключ
+                workers.Remove(job);
         }
 
         OutputSuccess("Сотрудник успешно удален.\n");
